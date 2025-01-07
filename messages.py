@@ -7,7 +7,7 @@ def create_hubspot_webhook():
         'Content-Type': 'application/json'
     }
     data = {
-        "subscriptionUrl": "https://your-server.com/webhook",  # Your endpoint to receive webhook events
+        "subscriptionUrl": "https://ai.corlandpartners.com/en/chatbot/api/v1/message/",  # Your endpoint to receive webhook events
         "events": [
             "conversations.message.sent"
         ]

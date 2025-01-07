@@ -16,7 +16,7 @@ def handle_hubspot_webhook():
 
 def update_conversation_in_stammer_ai(email, message):
     # Assuming you have Stammer.ai API to update conversations
-    url = 'https://api.stammer.ai/v1/conversations'
+    url = 'https://ai.corlandpartners.com/en/chatbot/api/v1/message/'
     data = {
         "email": email,
         "message": message
