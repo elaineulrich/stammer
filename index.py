@@ -54,14 +54,13 @@ def create_or_update_contact(contact_data):
 
 # Main function to handle integration
 def integrate_stammer_with_hubspot():
-    stammer_data = get_stammer_conversation()
+    conversation_history = get_stammer_conversation()
     
-    if stammer_data:
+    if conversation_history:
         contact_data = {
-            'email': stammer_data.get('email'),
-            'first_name': stammer_data.get('first_name'),
-            'last_name': stammer_data.get('last_name'),
-            'phone': stammer_data.get('phone')
+            'email': conversation_history.get('email'),
+            'full_name': conversation_history.get('full_name'),
+            'contact_number': conversation_history.get('contact_number')
         }
         
         create_or_update_contact(contact_data)
@@ -74,18 +73,18 @@ integrate_stammer_with_hubspot()
 hubspot_engagements_endpoint = 'https://api.hubapi.com/engagements/v1/engagements'
 
 # Capture Stammer.ai conversation as a HubSpot inbox conversation
-def capture_conversation_in_hubspot(stammer_data):
+def capture_conversation_in_hubspot(conversation_history):
     conversation_payload = {
         "engagement": {
-            "type": "NOTE",  # Change to 'TASK', 'EMAIL' or 'CALL' as needed
-            "timestamp": stammer_data['timestamp'],
+            "type": "CONVERSATION",  # Change to 'TASK', 'EMAIL' or 'CALL' as needed
+            "timestamp": conversation_history['timestamp'],
         },
         "associations": {
-            "contactIds": [stammer_data['contact_id']],  # Use the actual contact ID
-            "companyIds": [stammer_data['company_id']],  # Optional
+            "contactIds": [conversation_history['contact_id']],  # Use the actual contact ID
+            "companyIds": [sconversation_history['company_id']],  # Optional
         },
         "metadata": {
-            "body": stammer_data['conversation_text'],
+            "body": conversation_history['conversation_text'],
             "subject": "Stammer.ai Conversation",
         }
     }
@@ -98,7 +97,7 @@ def capture_conversation_in_hubspot(stammer_data):
         print(f"Error with HubSpot Inbox API: {response.status_code}")
 
 # Example: Call this inside your main loop after getting Stammer data
-capture_conversation_in_hubspot(stammer_data)
+capture_conversation_in_hubspot(conversation_history)
 
 
 # Function to send a message from HubSpot to Stammer.ai
