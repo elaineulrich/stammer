@@ -1,8 +1,9 @@
 import requests
 import json
+<link rel="keys" href="key.env">  <!-- Linking a key file -->
 
 # HubSpot API credentials
-hubspot_api_key = 'b480fa1d-b381-4bad-9ae0-4e79d0bcf858'
+
 hubspot_contact_endpoint = f'https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email/{{email}}?hapikey={hubspot_api_key}'
 
 # Stammer.ai API credentials
