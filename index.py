@@ -14,6 +14,14 @@ hubspot_headers = {
     'Content-Type': 'application/json'
 }
 
+
+def handler(request):
+    return {
+        "statusCode": 200,
+        "body": json.dumps({"message": "Hello from Vercel!"}),
+    }
+
+
 # Get Stammer.ai conversation data
 def get_stammer_conversation():
     response = requests.get(stammer_endpoint, headers={'Authorization': f'Bearer {stammer_api_key}'})
