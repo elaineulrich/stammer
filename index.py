@@ -1,6 +1,10 @@
 import requests
 import json
-<link rel="keys" href="key.env">  <!-- Linking a key file -->
+require('dotenv').config();
+
+const hubspot_api_key = process.env.API_KEY;
+console.log(hubspot_api_key);  // Should print your API key
+
 
 # HubSpot API credentials
 
